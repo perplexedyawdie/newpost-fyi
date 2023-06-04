@@ -76,7 +76,7 @@ const ImageUpload = ({ setPostURL }: Props) => {
     <>
       <div className="card max-w-md w-full glass">
         <div className={gradientBg}></div>
-        <div className="card-body justify-center items-center h-40 overflow-hidden">
+        <div className="card-body justify-center items-center h-40 overflow-hidden relative">
           <BsImage size={32} className={imgIcon} />
           {
             uploadedImg ? <Image src={URL.createObjectURL(uploadedImg)} alt="Uploaded meta tag image" fill={true} className="object-cover" /> : null

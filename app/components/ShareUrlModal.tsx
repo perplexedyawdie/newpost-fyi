@@ -1,5 +1,4 @@
-
-import useClipboard from "react-use-clipboard";
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import toast from 'react-hot-toast'
 import {
     FacebookShareButton,
@@ -20,15 +19,6 @@ interface GeneratedURL {
     url: string;
 }
 function ShareUrlModal({ url }: GeneratedURL) {
-    const [isCopied, setCopied] = useClipboard(url);
-    function handleCopy(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
-        event.preventDefault();
-        setCopied()
-        toast.success("Link copied!", {
-            icon: "✂"
-        })
-    }
-
     return (
         <>
             <dialog id="shareModal" className="modal modal-bottom sm:modal-middle">
@@ -37,7 +27,18 @@ function ShareUrlModal({ url }: GeneratedURL) {
                     {/* <p>{url}</p> */}
                     <div className="join">
                         <input readOnly value={`${url}`} type="text" placeholder="Type here" className="input input-primary w-full max-w-xs join-item" />
-                        <button onClick={handleCopy} className="btn join-item rounded-r-full btn-primary text-white">Copy</button>
+                        <CopyToClipboard text={url}
+                            onCopy={(text, result) => {
+                                toast.success("Link copied!", {
+                                    icon: "✂"
+                                })
+                                console.log(" text: ", text)
+                                console.log("result: ", result)
+
+                            }}>
+                            <span className="btn join-item rounded-r-full btn-primary text-white">Copy</span>
+                        </CopyToClipboard>
+                        
                     </div>
                     <p className="py-4">Share anywhere:</p>
                     <div className="flex justify-center items-center space-x-2">
