@@ -4,7 +4,7 @@ FROM node:lts-alpine3.17
 # Set the working directory inside the container
 WORKDIR /app
 
-RUN apt-get update -y
+RUN apt update -y
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
