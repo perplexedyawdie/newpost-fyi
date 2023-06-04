@@ -1,10 +1,10 @@
 # Use the official Node.js lts image as the base image
-FROM node:lts-alpine3.17
+FROM node:lts-slim
 
 # Set the working directory inside the container
 WORKDIR /app
 
-RUN apt update -y
+RUN apt-get update -y
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
