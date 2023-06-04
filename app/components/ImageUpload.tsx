@@ -43,7 +43,7 @@ const ImageUpload = ({ setPostURL }: Props) => {
       })
       const res = await resp.json();
       console.log(res.shareURL);
-      setPostURL(`${process.env.BASE_URL}${res.shareURL}`);
+      setPostURL(`${process.env.NEXT_PUBLIC_BASE_URL}${res.shareURL}`);
       (window as any)["shareModal"].showModal()
 
     } catch (error) {
