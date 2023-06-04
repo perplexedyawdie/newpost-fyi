@@ -8,18 +8,35 @@
 
 > Weekend hackathon project for MLH. It allows you to generate unique link previews for your site, on demand, in les than 4 clicks.
 
-### 🏠 [Homepage](https://newpost.fyi)
+### 🏠 [Try me out here!](https://newpost.fyi)
+
+### Demo Video
+
+
+
+
+https://github.com/perplexedyawdie/newpost-fyi/assets/33191770/1fec7f52-ce4d-49e1-8238-dc5cd6c9c432
+
+
 
 ## Install
 
 ```sh
+# locally
 npm install
+
+# docker
+docker build -t newpost .
 ```
 
-## Usage
+## Usage 
 
 ```sh
+# locally
 npm run dev
+
+# docker
+docker run -d -p <host-port>:3000 --name newpost-app newpost
 ```
 
 ## Author
