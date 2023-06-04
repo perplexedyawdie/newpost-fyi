@@ -1,6 +1,4 @@
 'use server';
-import { Collection, Db, ObjectId } from 'mongodb';
-import dbObj from '../libs/mongo';
 import { Client, BucketItemStat } from "minio"
 
 interface MetaDataRequest {

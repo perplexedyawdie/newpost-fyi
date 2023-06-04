@@ -13,8 +13,6 @@ const ImageUpload = () => {
   const [siteURL, setSiteURL] = useState<string>("")
   const [metaTitle, setMetaTitle] = useState<string>("")
   const [metaDesc, setMetaDesc] = useState<string>("")
-  let [isPending, startTransition] = useTransition();
-
 
   const gradientBg = classNames("absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200", {
     "hidden": uploadedImg
@@ -33,13 +31,18 @@ const ImageUpload = () => {
 
   async function processRequest(img: File) {
     try {
+      const metaDataForm = new FormData();
+      metaDataForm.append("file", img);
+      metaDataForm.append("metaText", metaTitle);
+      metaDataForm.append("metaDesc", metaDesc);
+      metaDataForm.append("metaURL", siteURL);
 
-      const buffer = await img.arrayBuffer(); // Get the file data as an ArrayBuffer
-      // Convert the ArrayBuffer to a Buffer
-      const fileBuffer = Buffer.from(buffer).toString('utf8');
-      startTransition(() => {
-
+      const resp = await fetch("/api/upload", {
+        method: "POST",
+        body: metaDataForm
       })
+      const res = await resp.json()
+      console.log(res)
     } catch (error) {
       console.error(error)
     }

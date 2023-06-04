@@ -55,7 +55,7 @@ export default async function handler(
             result.meta)
         console.log(savedImg)
         if (savedImg) {
-            res.status(200).send({ etag: savedImg.etag })
+            res.status(200).send({ shareURL: `${imgId}.${result.data.newFilename.split(".")[1]}` })
         } else {
             throw "Image not saved"
         }

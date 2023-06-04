@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import { getData } from "../actions/metaData"
 import { Metadata, ResolvingMetadata } from 'next';
 
@@ -19,6 +20,7 @@ export async function generateMetadata(
     } else {
         return {
             title: data.metatext,
+            description: data.metadesc,
             openGraph: {
                 title: data.metatext,
                 description: data.metadesc,
@@ -41,10 +43,11 @@ export async function generateMetadata(
 }
 
 export default async function YourPost({ params }: { params: { objectId: string } }) {
+    const data = await getData({ objectId: params.objectId })
 
     return (
         <div>
-            {params.objectId}
+            {redirect(encodeURI(data?.metaurl || "/"))}
         </div>
     )
 }
