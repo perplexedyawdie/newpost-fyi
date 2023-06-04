@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 interface Props {
@@ -11,6 +11,8 @@ function Redirector({ url }: Props) {
         return () => {
             clearTimeout(p)
         }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
