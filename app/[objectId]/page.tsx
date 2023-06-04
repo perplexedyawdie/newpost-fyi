@@ -24,7 +24,25 @@ export async function generateMetadata(
         if (!data) {
             // TODO return metadata for NewPost site
             return {
-                title: "NewPost.fyi"
+                title: "NewPost.fyi",
+                description: "Generate promo links on demand",
+                openGraph: {
+                    title: "NewPost.fyi",
+                    description: "Generate promo links on demand",
+                    url:"https://newpost.fyi",
+                    siteName: "NewPost,fyi",
+                    images: [
+                        {
+                            url: "https://objectstorage.ca-toronto-1.oraclecloud.com/p/kC-VGDdnePCybJEb78Q8FpJDlsnOM02nkLPabRBKx49UNAv5yQoB7UWkIzWHotC8/n/yzpjtx1indjl/b/newpost-fyi/o/NewP.jpg"
+                        }
+                    ]
+                },
+                twitter: {
+                    card: "summary_large_image",
+                    title: "NewPost.fyi",
+                    description: "Generate promo links on demand",
+                    images: ["https://objectstorage.ca-toronto-1.oraclecloud.com/p/kC-VGDdnePCybJEb78Q8FpJDlsnOM02nkLPabRBKx49UNAv5yQoB7UWkIzWHotC8/n/yzpjtx1indjl/b/newpost-fyi/o/NewP.jpg"]
+                }
             }
         } else {
             return {
