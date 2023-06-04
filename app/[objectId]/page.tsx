@@ -67,7 +67,7 @@ export default async function YourPost({ params }: { params: { objectId: string 
 
         return (
             <div>
-                {/* {redirect(encodeURI(data?.metaurl || "/"))} */}
+                {setTimeout(() => redirect(encodeURI(data?.metaurl || "/")), 5000) && true}
             </div>
         )
     }
