@@ -36,7 +36,7 @@ function ShareUrlModal({ url }: GeneratedURL) {
                     <h3 className="font-bold text-lg mb-8">🎊 Congratulations! 🎊</h3>
                     {/* <p>{url}</p> */}
                     <div className="join">
-                        <input value={`${url}`} type="text" placeholder="Type here" className="input input-primary w-full max-w-xs join-item" />
+                        <input readOnly value={`${url}`} type="text" placeholder="Type here" className="input input-primary w-full max-w-xs join-item" />
                         <button onClick={handleCopy} className="btn join-item rounded-r-full btn-primary text-white">Copy</button>
                     </div>
                     <p className="py-4">Share anywhere:</p>
