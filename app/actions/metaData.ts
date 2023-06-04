@@ -9,6 +9,7 @@ interface MetaDataResponse {
     metadesc: string;
     metatext: string;
     metaurl: string;
+    presignedURL: string
 }
 
 export async function getData({ objectId }: MetaDataRequest): Promise<MetaDataResponse | null> {
@@ -20,11 +21,13 @@ export async function getData({ objectId }: MetaDataRequest): Promise<MetaDataRe
             secretKey: process.env.MINIO_SECRET_KEY!
         })
         const resp = await asyncStatObject(minioClient, objectId);
-        if (resp) {
+        const url = await asyncPresigned(minioClient, objectId);
+        if (resp && url) {
             const metaResp: MetaDataResponse = {
                 metadesc: decodeURIComponent(resp.metaData.metadesc),
                 metatext: decodeURIComponent(resp.metaData.metatext),
-                metaurl: decodeURIComponent(resp.metaData.metaurl)
+                metaurl: decodeURIComponent(resp.metaData.metaurl),
+                presignedURL: url
             }
             return metaResp;
         } else {
@@ -38,17 +41,34 @@ export async function getData({ objectId }: MetaDataRequest): Promise<MetaDataRe
 }
 
 async function asyncStatObject(minioClient: Client, objectId: string) {
-    return new Promise<null | BucketItemStat>((resolve, reject) => { 
+    return new Promise<null | BucketItemStat>((resolve, reject) => {
         minioClient.statObject(
-            process.env.MINIO_BUCKET!, 
-            objectId, 
+            process.env.MINIO_BUCKET!,
+            objectId,
             (error: Error | null, result: BucketItemStat) => {
-                if(error) {
+                if (error) {
                     console.log("stat object error")
                     // console.error(error)
                     reject(null)
                 }
                 resolve(result)
             })
-     })
+    })
+}
+
+async function asyncPresigned(minioClient: Client, objectId: string) {
+    return new Promise<null | string>((resolve, reject) => {
+        minioClient.presignedGetObject(
+            process.env.MINIO_BUCKET!,
+            objectId,
+            60,
+            (error: Error | null, result: string) => {
+                if (error) {
+                    console.log("presignedGetObject error")
+                    // console.error(error)
+                    reject(null)
+                }
+                resolve(result)
+            })
+    })
 }

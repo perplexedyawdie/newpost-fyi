@@ -37,7 +37,7 @@ export async function generateMetadata(
                     siteName: data.metatext,
                     images: [
                         {
-                            url: "https://objectstorage.ca-toronto-1.oraclecloud.com/p/ojOKJ0J1wcI5Rw7ioFY5nwIZialA43XcKAMhwoLij9Kgp7oPbV5sTPw3JTdx2-ts/n/yzpjtx1indjl/b/clip-craft-studio-assets/o/icon-512x512.png"
+                            url: data.presignedURL
                         }
                     ]
                 },
@@ -45,7 +45,7 @@ export async function generateMetadata(
                     card: "summary_large_image",
                     title: data.metatext,
                     description: data.metadesc,
-                    images: ["https://objectstorage.ca-toronto-1.oraclecloud.com/p/ojOKJ0J1wcI5Rw7ioFY5nwIZialA43XcKAMhwoLij9Kgp7oPbV5sTPw3JTdx2-ts/n/yzpjtx1indjl/b/clip-craft-studio-assets/o/icon-512x512.png"]
+                    images: [data.presignedURL]
                 }
             };
         }
