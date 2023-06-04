@@ -67,7 +67,7 @@ export default async function YourPost({ params }: { params: { objectId: string 
 
         return (
             <div>
-                {redirect(encodeURI(data?.metaurl || "/"))}
+                {/* {redirect(encodeURI(data?.metaurl || "/"))} */}
             </div>
         )
     }
