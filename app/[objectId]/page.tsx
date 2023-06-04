@@ -2,6 +2,7 @@
 import { redirect } from "next/navigation";
 import { getData } from "../actions/metaData"
 import { Metadata, ResolvingMetadata } from 'next';
+import Redirector from "../components/Redirector";
 
 type Props = {
     params: { objectId: string };
@@ -67,7 +68,7 @@ export default async function YourPost({ params }: { params: { objectId: string 
 
         return (
             <div>
-                {setTimeout(() => redirect(encodeURI(data?.metaurl || "/")), 5000) && true}
+                <Redirector url={data?.metaurl} />
             </div>
         )
     }
