@@ -44,7 +44,8 @@ async function asyncStatObject(minioClient: Client, objectId: string) {
             objectId, 
             (error: Error | null, result: BucketItemStat) => {
                 if(error) {
-                    console.error(error)
+                    console.log("stat object error")
+                    // console.error(error)
                     reject(null)
                 }
                 resolve(result)

@@ -1,12 +1,9 @@
 "use client"
-import React, { useState, useTransition, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BsImage } from 'react-icons/bs';
 import toast, { Toaster } from 'react-hot-toast'
 import classNames from 'classnames';
 import Image from 'next/image';
-
-
-
 
 const ImageUpload = () => {
   const [uploadedImg, setUploadedImg] = useState<File | null>(null)
@@ -44,28 +41,30 @@ const ImageUpload = () => {
       const res = await resp.json()
       console.log(res)
     } catch (error) {
+      console.error("fetch process request error")
       console.error(error)
     }
   }
 
 
   function handleGenerate(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
-    if (uploadedImg && siteURL !== "" && metaTitle !== "" && metaDesc !== "") {
-      console.log(siteURL)
-      console.log(metaTitle)
-      console.log(metaDesc)
-      console.log(uploadedImg)
-      toast.promise(
-        processRequest(uploadedImg),
-        {
-          loading: 'Saving...',
-          success: <b>Post saved!</b>,
-          error: <b>Could not save.</b>,
-        }
-      );
-    } else {
-      toast.error("Please add all details!")
-    }
+      (window as any)["shareModal"].showModal()
+    // if (uploadedImg && siteURL !== "" && metaTitle !== "" && metaDesc !== "") {
+    //   console.log(siteURL)
+    //   console.log(metaTitle)
+    //   console.log(metaDesc)
+    //   console.log(uploadedImg)
+    //   toast.promise(
+    //     processRequest(uploadedImg),
+    //     {
+    //       loading: 'Saving...',
+    //       success: <b>Post saved!</b>,
+    //       error: <b>Could not save.</b>,
+    //     }
+    //   );
+    // } else {
+    //   toast.error("Please add all details!")
+    // }
   }
 
   return (
