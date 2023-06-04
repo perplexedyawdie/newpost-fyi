@@ -1,6 +1,5 @@
-import ImageUpload from "./components/ImageUpload";
-import ShareUrlModal from "./components/ShareUrlModal";
-// import { useContext } from 'react'
+import NewPost from "./components/NewPost";
+
 export default async function Page() {
   return (
     <>
@@ -8,11 +7,7 @@ export default async function Page() {
         <div className="hero-content text-center relative px-0 sm:px-4">
           <div className=" justify-center items-center ">
             <div className="w-full flex justify-center items-center flex-col space-y-4">
-              <ImageUpload />
-              {/* <Suspense fallback={<div>Loading...</div>}> */}
-
-                <ShareUrlModal />
-              {/* </Suspense> */}
+              <NewPost />
             </div>
           </div>
         </div>

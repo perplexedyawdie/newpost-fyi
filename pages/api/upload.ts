@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import formidable, { File } from 'formidable'
 import fs from 'fs'
-import { Client, ItemBucketMetadata, ResultCallback, UploadedObjectInfo } from "minio"
+import { Client, ItemBucketMetadata, UploadedObjectInfo } from "minio"
 import ShortUniqueId from 'short-unique-id';
 
 const form = formidable({ multiples: false, keepExtensions: true })

@@ -5,7 +5,10 @@ import toast, { Toaster } from 'react-hot-toast'
 import classNames from 'classnames';
 import Image from 'next/image';
 
-const ImageUpload = () => {
+interface Props {
+  setPostURL: React.Dispatch<React.SetStateAction<string>>
+}
+const ImageUpload = ({ setPostURL }: Props) => {
   const [uploadedImg, setUploadedImg] = useState<File | null>(null)
   const [siteURL, setSiteURL] = useState<string>("")
   const [metaTitle, setMetaTitle] = useState<string>("")
@@ -38,8 +41,11 @@ const ImageUpload = () => {
         method: "POST",
         body: metaDataForm
       })
-      const res = await resp.json()
-      console.log(res)
+      const res = await resp.json();
+      console.log(res.shareURL);
+      setPostURL(res.shareURL);
+      (window as any)["shareModal"].showModal()
+
     } catch (error) {
       console.error("fetch process request error")
       console.error(error)
@@ -48,23 +54,22 @@ const ImageUpload = () => {
 
 
   function handleGenerate(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
-      (window as any)["shareModal"].showModal()
-    // if (uploadedImg && siteURL !== "" && metaTitle !== "" && metaDesc !== "") {
-    //   console.log(siteURL)
-    //   console.log(metaTitle)
-    //   console.log(metaDesc)
-    //   console.log(uploadedImg)
-    //   toast.promise(
-    //     processRequest(uploadedImg),
-    //     {
-    //       loading: 'Saving...',
-    //       success: <b>Post saved!</b>,
-    //       error: <b>Could not save.</b>,
-    //     }
-    //   );
-    // } else {
-    //   toast.error("Please add all details!")
-    // }
+    if (uploadedImg && siteURL !== "" && metaTitle !== "" && metaDesc !== "") {
+      console.log(siteURL)
+      console.log(metaTitle)
+      console.log(metaDesc)
+      console.log(uploadedImg)
+      toast.promise(
+        processRequest(uploadedImg),
+        {
+          loading: 'Saving...',
+          success: <b>Post saved!</b>,
+          error: <b>Could not save.</b>,
+        }
+      );
+    } else {
+      toast.error("Please add all details!")
+    }
   }
 
   return (
